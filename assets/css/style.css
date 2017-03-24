@@ -2,10 +2,21 @@ body{
 	background-image: url("../images/iconicBackground.png");
 }
 
-h1{
+header{
+	background-color: #FFBD4A;
+	width: 100%;
+	margin: 0px;
+	text-align: center;
+}
 
+h1{
+	color: #5271FF;
+	font-family: 'Rubik Mono One', sans-serif;
+	font-size: 60px;
 }
 
 h3{
-	
+	color: #2EB2FF;
+	font-family: 'Rubik Mono One', sans-serif;
+	font-size: 45px;
 }

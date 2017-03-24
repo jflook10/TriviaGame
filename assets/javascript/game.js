@@ -5,33 +5,34 @@
 // 					Q5 : ["Question 5:", "../images/underArmor.jpg", "Answer 1E", "Answer 2E", "Answer 3E", "Answer 4E", "Answer 1E"],
 // 					Q6 : ["Question 6:", "../images/wwf.jpg", "Answer 1F", "Answer 2F", "Answer 3F", "Answer 4F", "Answer 1F"]};
 
-var questionPool = [ { image: "assets/images/homeaway.jpg",
-							A1: "Answer 1A", 
-							A2: "Answer 2A", 
-							A3: "Answer 3A", 
-							A4: "Answer 4A", 
-							Correct: "Answer 1A"
-
+var questionPool = [{ image: "assets/images/instructions.png"}, 
+					
+					{ image: "assets/images/homeAway.png",
+							1: "The Bird House", 
+							2: "HomeAway", 
+							3: "Tree House", 
+							4: "Air BnB", 
+							Correct: "HomeAway"
 						},
 					{ image: "assets/images/instagram.png",
-							B1: "Answer 1B", 
-							B2: "Answer 2B", 
-							B3: "Answer 3B", 
-							B4: "Answer 4B", 
-							Correct: "Answer 1B"
-
+							1: "Instagram", 
+							2: "Captcha", 
+							3: "Canva", 
+							4: "Photor", 
+							Correct: "Instagram"
 						},
-					{ images: "assets/images/tch.png",
-							C1: "Answer 1C", 
-							C2: "Answer 2C", 
-							C3: "Answer 3C", 
-							C4: "Answer 4C", 
-							Correct: "Answer 1C"
+					{ image: "assets/images/tch.png",
+							1: "March of Dimes", 
+							2: "Kajima", 
+							3: "Texas Children's Hospital", 
+							4: "Cigna", 
+							Correct: "Texas Children's Hospital"
 						}			
-]
+];
 
 
 var showImage;
+var answers = $(".answers");
 var count = 0;
 
 // Use jQuery to run "startTrivia" when we click the "start" button.
@@ -40,46 +41,79 @@ $(".startBtn").on("click", startSlideshow);
 // Use jQuery to run "reset" when we click the "reset" button.
 $(".reset").on("click", stopSlideshow);
 
-// This function will replace display whatever image it's given
+//User jquery to catch user responses
+$(".response").on("click", catchUserRsp);
 
-// function displayImage() {
-//   $("#imageHolder").html("<img src=" + questionPool[count].image + ">");
-//   console.log("displaying is working");
-// }
 
 function nextImage() {
 	$("#imageHolder").html("<img src=" + questionPool[count].image + ">");
-  // TODO: Increment the count by 1.
-  console.log(count + " count var");
-  count++; 
+
+	//call nextAnswers to appear on screen at same time as associated image
+	nextAnswers();
+
+  	//Increment the count by 1.
+  	count++; 
+
+
 
   // TODO: Use a setTimeout to run displayImage after 1 second.
   //setTimeout(displayImage, 3000);
   console.log("next image is working");
 
+
   // TODO: If the count is the same as the length of the image array, reset the count to 0.
   if(count === questionPool.length ){ 
+  	count = 0;
   	clearInterval(showImage);
 
-  }
+  };
 }
+
+function nextAnswers(){
+	//delete old answer selections
+	answers.empty();
+
+	//loop through answers at count and display to the screen
+	for (var i = 1; i < 5; i++){
+		var question = questionPool[count][i];
+		var questionTxt = $("<p>").text(question).addClass("response");
+		answers.append(questionTxt);
+	}
+
+}
+
+
+//onclick function to capture user responses
+ function catchUserRsp(){
+ 	console.log(this + "TESTING");
+	//capture user answer
+	userRsp = this.filter(".response").text()
+	
+	console.log(this + "testing 123");
+	//compare user answer to correct answer
+
+	//if correct ...
+
+	//else wrong answer or no answer ...
+
+};
+
+
+
 
 function startSlideshow() {
-
-  // TODO: Use showImage to hold the setInterval to run nextImage.
+  //Use showImage to hold the setInterval to run nextImage.
   showImage = setInterval(nextImage, 3000);
 }
-function stopSlideshow() {
 
-  // TODO: Put our clearInterval here:
+function stopSlideshow() {
+  // Put our clearInterval here
   clearInterval(showImage);
+  nextImage();
+  answers.empty();
 }
 
-// This will run the display image function as soon as the page loads.
-//displayImage();
+// This will run the image function as soon as the page loads.
 nextImage();
-// function displayQuestion(){
-// 	//not working yet. pulled code from slideshow
-//   $("#imageHolder").html("<img src=" + images[count] + " width='400px'>");
-//   console.log("displaying is working")
-// }
+
+
