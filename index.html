@@ -25,21 +25,28 @@
 			<h3>Trivia Game</h3>
 		</div>
 	</header>
-	<div class="container">
-		<main class="row">
+	<main class="container">
+		<section class="row">
 			<aside class="col-md-6 col-sm-12">
-				<section class="timeDisplay"> 00:00</section>
+				<section class="timeDisplay"></section>
+			</aside>
+		</section>
+		<section class="row">
+			<aside class="col-md-6 col-sm-12">
 				<section id="imageHolder"></section>
 			</aside>
-			<section class="col-md-6 col-sm-12">
-				<section class="col-md-12 answers">
+			
+			<section class="col-md-6 col-sm-12 answerArea">
+				<section class="row" id="answers">
 						Answer/s
 				</section>
-				<button class="startBtn">START</button>
-				<button class="reset">RESET</button>
+				<section class="row" id="buttonHolder">
+					<button class="btn btn-primary startBtn">START</button>
+					<button class="btn btn-warning reset">RESET</button>
+				</section>
 			</section>
-		</main>
-	</div>
+		</section>
+	</main>
 
 <!-- personal js file -->
 <script type="text/javascript" src="assets/javascript/game.js"></script>

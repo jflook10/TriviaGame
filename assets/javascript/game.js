@@ -1,9 +1,3 @@
-// var questionPool = {Q1 : ["Question 1:", "../images/homeaway.jpg", "Answer 1A", "Answer 2A", "Answer 3A", "Answer 4A", "Answer 1A"],
-// 					Q2 : ["Question 2:", "../images/instagram.png", "Answer 1B", "Answer 2B", "Answer 3B", "Answer 4B", "Answer 1B"],
-// 					Q3 : ["Question 3:", "../images/microsoft.png", "Answer 1C", "Answer 2C", "Answer 3C", "Answer 4C", "Answer 1C"],
-// 					Q4 : ["Question 4:", "../images/tch.png", "Answer 1D", "Answer 2D", "Answer 3D", "Answer 4D", "Answer 1D"],
-// 					Q5 : ["Question 5:", "../images/underArmor.jpg", "Answer 1E", "Answer 2E", "Answer 3E", "Answer 4E", "Answer 1E"],
-// 					Q6 : ["Question 6:", "../images/wwf.jpg", "Answer 1F", "Answer 2F", "Answer 3F", "Answer 4F", "Answer 1F"]};
 
 var questionPool = [{ image: "assets/images/instructions.png"}, 
 					
@@ -32,8 +26,12 @@ var questionPool = [{ image: "assets/images/instructions.png"},
 
 
 var showImage;
-var answers = $(".answers");
+var showTime;
+var seconds;
+var minutes = 0;
+var answers = $("#answers");
 var count = 0;
+var time = 3;
 
 // Use jQuery to run "startTrivia" when we click the "start" button.
 $(".startBtn").on("click", startSlideshow);
@@ -42,7 +40,7 @@ $(".startBtn").on("click", startSlideshow);
 $(".reset").on("click", stopSlideshow);
 
 //User jquery to catch user responses
-$(".response").on("click", catchUserRsp);
+ $("body").on("click", ".response", catchUserRsp); 
 
 
 function nextImage() {
@@ -56,7 +54,7 @@ function nextImage() {
 
 
 
-  // TODO: Use a setTimeout to run displayImage after 1 second.
+  //Use a setTimeout to run displayImage after 1 second.
   //setTimeout(displayImage, 3000);
   console.log("next image is working");
 
@@ -68,6 +66,7 @@ function nextImage() {
 
   };
 }
+
 
 function nextAnswers(){
 	//delete old answer selections
@@ -83,37 +82,65 @@ function nextAnswers(){
 }
 
 
+//NOT WORKING!!! 
+
 //onclick function to capture user responses
  function catchUserRsp(){
- 	console.log(this + "TESTING");
-	//capture user answer
-	userRsp = this.filter(".response").text()
-	
-	console.log(this + "testing 123");
+ 	console.log($(this).text() + "TESTING");
+	// capture user answer
+	userRsp = $(this).text()
+
 	//compare user answer to correct answer
-
 	//if correct ...
-
+	if(userRsp === questionPool[count].Correct || userRsp === questionPool[count - 1].Correct){
+		alert("YOU GOT IT RIGHT!");
+	}else{
+		alert("Wrong... boo");
+	}
 	//else wrong answer or no answer ...
 
 };
 
+
+function timer(){
+	seconds = time;
+
+	if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    $(".timeDisplay").empty().html("00:" + seconds);
+    
+    time--;
+
+	if (time === 0){
+	 	time = 3;
+	}
+
+
+}
 
 
 
 function startSlideshow() {
   //Use showImage to hold the setInterval to run nextImage.
   showImage = setInterval(nextImage, 3000);
+
+  //set interval to loop through timer
+  showTime = setInterval(timer, 1000);
 }
 
 function stopSlideshow() {
   // Put our clearInterval here
   clearInterval(showImage);
+  clearInterval(showTime);
+  count = 0;
   nextImage();
   answers.empty();
+  $(".timeDisplay").html("00:03");
 }
 
 // This will run the image function as soon as the page loads.
 nextImage();
-
+timer();
 

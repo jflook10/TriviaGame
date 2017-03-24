@@ -1,5 +1,6 @@
 body{
 	background-image: url("../images/iconicBackground.png");
+	background-size: cover;
 }
 
 header{
@@ -19,4 +20,19 @@ h3{
 	color: #2EB2FF;
 	font-family: 'Rubik Mono One', sans-serif;
 	font-size: 45px;
+}
+
+.answerArea{
+	background-color: #fff;
+	border: 2px solid #2EB2FF;
+	border-radius: 25px;
+	padding: 2%;
+	min-height: 350px;
+	min-width: 350px;
+
+}
+
+/*available questions during quiz*/
+.response{
+	color: #5271FF;
 }
