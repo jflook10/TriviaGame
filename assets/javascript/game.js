@@ -21,7 +21,30 @@ var questionPool = [{ image: "assets/images/instructions.png"},
 							3: "Texas Children's Hospital", 
 							4: "Cigna", 
 							Correct: "Texas Children's Hospital"
-						}			
+						},			
+					{ image: "assets/images/microsoft.png",
+							1: "Windows", 
+							2: "Alien Ware", 
+							3: "Intel", 
+							4: "Microsoft", 
+							Correct: "Microsoft"
+						},
+						{ image: "assets/images/underArmor.png",
+							1: "University of Alabama", 
+							2: "Under Armor", 
+							3: "Unix", 
+							4: "UnovA", 
+							Correct: "Under Armor"
+						},
+						{ image: "assets/images/wwf.png",
+							1: "World Wildlife Fund", 
+							2: "Kajima", 
+							3: "San Francisco Zoo", 
+							4: "Panda Sanctuary of Japan", 
+							Correct: "World Wildlife Fund"
+						},
+						{ image: "assets/images/reset.png",
+						}
 ];
 
 
@@ -31,7 +54,7 @@ var seconds;
 var minutes = 0;
 var answers = $("#answers");
 var count = 0;
-var time = 3;
+var time = 5;
 
 // Use jQuery to run "startTrivia" when we click the "start" button.
 $(".startBtn").on("click", startSlideshow);
@@ -63,6 +86,7 @@ function nextImage() {
   if(count === questionPool.length ){ 
   	count = 0;
   	clearInterval(showImage);
+  	clearInterval(showTime);
 
   };
 }
@@ -82,7 +106,6 @@ function nextAnswers(){
 }
 
 
-//NOT WORKING!!! 
 
 //onclick function to capture user responses
  function catchUserRsp(){
@@ -92,12 +115,11 @@ function nextAnswers(){
 
 	//compare user answer to correct answer
 	//if correct ...
-	if(userRsp === questionPool[count].Correct || userRsp === questionPool[count - 1].Correct){
+	if(userRsp === questionPool[count - 1].Correct){
 		alert("YOU GOT IT RIGHT!");
 	}else{
-		alert("Wrong... boo");
+		alert("Wrong, boo... The correct answer was " + questionPool[count - 1].Correct);
 	}
-	//else wrong answer or no answer ...
 
 };
 
@@ -114,7 +136,7 @@ function timer(){
     time--;
 
 	if (time === 0){
-	 	time = 3;
+	 	time = 5;
 	}
 
 
@@ -124,7 +146,7 @@ function timer(){
 
 function startSlideshow() {
   //Use showImage to hold the setInterval to run nextImage.
-  showImage = setInterval(nextImage, 3000);
+  showImage = setInterval(nextImage, 5000);
 
   //set interval to loop through timer
   showTime = setInterval(timer, 1000);
@@ -137,7 +159,7 @@ function stopSlideshow() {
   count = 0;
   nextImage();
   answers.empty();
-  $(".timeDisplay").html("00:03");
+  $(".timeDisplay").html("00:05");
 }
 
 // This will run the image function as soon as the page loads.
